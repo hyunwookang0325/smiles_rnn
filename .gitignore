@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pixi/
+.ipynb_checkpoints/
+
+# trained weights / checkpoints
+*.npz
+*.pth
+*.pt
