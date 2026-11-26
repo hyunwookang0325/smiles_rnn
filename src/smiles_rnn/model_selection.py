@@ -1,18 +1,27 @@
+from pathlib import Path
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from loguru import logger
 from sklearn.model_selection import train_test_split
+from torch.utils.data import DataLoader, TensorDataset
 
 
 class RNN(nn.Module):
     def __init__(
-        self, input_size: int = 66, hidden_size: int = 128, batch_first: bool = True
+        self,
+        input_size: int = 66,
+        hidden_size: int = 128,
+        batch_first: bool = True,
+        seed: int = 42,
     ) -> None:
         super().__init__()
         self.input_size: int = input_size
         self.hidden_size: int = hidden_size
         self.batch_first: bool = batch_first
 
+        torch.manual_seed(seed)
         self.rnn: nn.RNN = nn.RNN(
             input_size=input_size, hidden_size=hidden_size, batch_first=batch_first
         )
@@ -31,13 +40,18 @@ class RNN(nn.Module):
 
 class GRU(nn.Module):
     def __init__(
-        self, input_size: int = 66, hidden_size: int = 128, batch_first: bool = True
+        self,
+        input_size: int = 66,
+        hidden_size: int = 128,
+        batch_first: bool = True,
+        seed: int = 42,
     ) -> None:
         super().__init__()
         self.input_size: int = input_size
         self.hidden_size: int = hidden_size
         self.batch_first: bool = batch_first
 
+        torch.manual_seed(seed)
         self.gru: nn.GRU = nn.GRU(
             input_size=input_size, hidden_size=hidden_size, batch_first=batch_first
         )
@@ -56,13 +70,18 @@ class GRU(nn.Module):
 
 class LSTM(nn.Module):
     def __init__(
-        self, input_size: int = 66, hidden_size: int = 128, batch_first: bool = True
+        self,
+        input_size: int = 66,
+        hidden_size: int = 128,
+        batch_first: bool = True,
+        seed: int = 42,
     ) -> None:
         super().__init__()
         self.input_size: int = input_size
         self.hidden_size: int = hidden_size
         self.batch_first: bool = batch_first
 
+        torch.manual_seed(seed)
         self.lstm: nn.LSTM = nn.LSTM(
             input_size=input_size, hidden_size=hidden_size, batch_first=batch_first
         )
